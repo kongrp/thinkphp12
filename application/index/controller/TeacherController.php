@@ -15,7 +15,7 @@ class TeacherController
 		$teacher = $teachers[0];
 
 		//调用上述对象的getData()方法
-		var_dump($teacher->getData());
+		var_dump($teacher->getData('name'));
 
 	}
 }
