@@ -12,5 +12,11 @@ class Teacher
 
 		//查看获取到的第0号数据的name值
 		var_dump($teachers[0]['name']);
+
+		//如果变量的类型是字符串，还可以使用echo语句直接返回给用户
+		echo $teachers[0]['name'];
+
+		//查看获取的数据
+		return $teachers[0]['name'];
 	}
 }
