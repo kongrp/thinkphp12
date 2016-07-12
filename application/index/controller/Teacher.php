@@ -10,7 +10,7 @@ class Teacher
 		//“获取教师表中所有数据”
 		$teachers = Db::name('teacher')->select();
 
-		//查看获取到的数据
-		var_dump($teachers);
+		//查看获取到的第0号数据
+		var_dump($teachers[0]);
 	}
 }
