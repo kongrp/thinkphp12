@@ -2,7 +2,7 @@
 namespace app\index\controller;
 use think\Db;
 
-class Index
+class IndexController
 {
     public function index()
     {

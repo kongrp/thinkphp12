@@ -5,7 +5,7 @@ use app\model\Teacher as SmallTeacher;  //引用数据库操作类-教师模型
  * 教师管理
  */
 
-class Teacher
+class TeacherController
 {
 	public function index()
 	{	
