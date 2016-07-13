@@ -26,12 +26,19 @@ class TeacherController extends Controller
 	//新建insert触发器，用来实现数据添加的功能
 	public function insert()
 	{
-		//查看数据是否以正确的方式传入,且insert是否已经正确接收了。
-		var_dump($_POST);
+		//接收用户输入的数据
+		$teacher = input('post.');
+		var_dump($teacher);
 
-		//使用input()助手函数并正确设置config.php后，与直接输出的区别。
-		$postData = input('post.');
-		var_dump($postData);
+		//引用Teacher模型
+		$Teacher = new Teacher;
+		var_dump($Teacher);
+
+		//插入数据
+		$Teacher->data($teacher)->save();
+
+		//反馈结果
+		return $teacher['name'] . '新增成功';
 	}
 
 	public function add()
