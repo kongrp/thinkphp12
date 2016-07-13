@@ -38,5 +38,11 @@ class TeacherController extends Controller
 		$Teacher = new Teacher;
 		var_dump($Teacher);
 
+		//向teacher表中插入数据并判断是否插入成功
+		//data方法是模型类的连贯操作方法之一，用于设置当前要操作的数据对象的值,是直接生成要操作的数据对象
+		$state = $Teacher->data($teacher)->save();
+		//返回的是一个数字，如果插入成功，则会返回数字。在开发模式下，我们认为，只要未抛出异常，那么就是插入成功。
+		var_dump($state);
+		
 	}
 }
