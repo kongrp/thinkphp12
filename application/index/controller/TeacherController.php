@@ -34,5 +34,9 @@ class TeacherController extends Controller
 		$teacher['email'] = 'wangwu@yunzhi.com';
 		var_dump($teacher);
 
+		//引用teacher数据表对应的模型
+		$Teacher = new Teacher;
+		var_dump($Teacher);
+
 	}
 }
