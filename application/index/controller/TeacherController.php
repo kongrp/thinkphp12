@@ -28,11 +28,10 @@ class TeacherController extends Controller
 	{
 		//接收用户输入的数据
 		$teacher = input('post.');
-		var_dump($teacher);
+		$teacher['create_time'] = time();//加入时间戳
 
 		//引用Teacher模型
 		$Teacher = new Teacher;
-		var_dump($Teacher);
 
 		//插入数据
 		$Teacher->data($teacher)->save();
