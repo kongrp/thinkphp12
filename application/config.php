@@ -18,4 +18,7 @@ return [
 
     //是否启用控制器后缀类
     'use_controller_suffix'  => true,
+
+    //设置过滤方法
+    'default_filter'  => 'htmlspecialchars',
 ];
