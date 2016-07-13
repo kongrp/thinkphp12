@@ -28,15 +28,21 @@ class TeacherController extends Controller
 	{
 		//接收用户输入的数据
 		$teacher = input('post.');
-		
+
 		//引用Teacher模型
 		$Teacher = new Teacher;
 
 		//插入数据
-		$Teacher->data($teacher)->save();
+		$result = $Teacher->validate(true)->data($teacher)->save();
 
 		//反馈结果
-		return $teacher['name'] . '新增成功';
+		if(false === $result)
+		{
+			return '新增失败' . $Teacher->getError();
+		}
+		//
+		//
+		return $teacher['name'] . '新增成功';	
 	}
 
 	public function add()
