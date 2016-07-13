@@ -22,4 +22,17 @@ class TeacherController extends Controller
 		// 将取回的数据返回给用户
 		return $htmls;
 	}
+
+	//新建insert触发器，用来实现数据添加的功能
+	public function insert()
+	{
+		//新建测试数据
+		$teacher = array();   // 这种写法也可以 $teacher = [];
+		$teacher['name'] = '王五';
+		$teacher['username'] = 'wangwu';
+		$teacher['sex'] = '1';
+		$teacher['email'] = 'wangwu@yunzhi.com';
+		var_dump($teacher);
+
+	}
 }
