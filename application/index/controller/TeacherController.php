@@ -50,4 +50,14 @@ class TeacherController extends Controller
 		$htmls = $this->fetch();
 		return $htmls;
 	}
+
+	public function test()
+	{
+		$data = array();
+        $data['username'] = 'ce';
+        $data['name'] = '1';
+        $data['sex'] = '1';
+        $data['email'] = 'hello@hello.com';
+        var_dump($this->validate($data, 'Teacher'));
+	}
 }
