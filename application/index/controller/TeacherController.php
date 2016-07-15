@@ -60,4 +60,21 @@ class TeacherController extends Controller
         $data['email'] = 'hello@hello.com';
         var_dump($this->validate($data, 'Teacher'));
 	}
+
+	public function delete()
+	{
+		//引入教师表模型
+		$Teacher = new Teacher;
+
+		//获取当前记录
+		if(false !== $teacher = $Teacher::get('3'))
+		{
+			//删除当前记录
+			if($state = $teacher->delete())
+			{
+				return '删除成功';
+			}
+		}
+		return '删除失败';
+	}
 }
