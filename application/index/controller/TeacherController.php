@@ -83,4 +83,25 @@ class TeacherController extends Controller
 		//进行跳转
 		return $this->success('删除成功', url('index'));
 	}
+
+	public function edit()
+	{
+		// 获取传入ID
+		$id = input('get.id/d');
+
+        // 在Teacher表模型中获取当前记录
+        if(false === $teacher = Teacher::get($id))
+        {
+        	return '系统中未找到id为：' . $id . '的记录';
+        }
+
+        // 将数据传给V层
+        $this->assign('teacher', $teacher);
+
+        // 获取封装好的V层内容
+        $htmls = $this->fetch();
+
+        // 将封装好的V层内容返回给用户
+        return $htmls;
+	}
 }
