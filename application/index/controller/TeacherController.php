@@ -63,18 +63,8 @@ class TeacherController extends Controller
 
 	public function delete()
 	{
-		//引入教师表模型
-		$Teacher = new Teacher;
-
-		//获取当前记录
-		if(false !== $teacher = $Teacher::get('3'))
-		{
-			//删除当前记录
-			if($state = $teacher->delete())
-			{
-				return '删除成功';
-			}
-		}
-		return '删除失败';
+		$state = Teacher::destroy(1);
+		var_dump($state);
+		return '删除成功';
 	}
 }
