@@ -63,6 +63,9 @@ class TeacherController extends Controller
 
 	public function delete()
 	{
+		var_dump(input('get.'));
+		die();
+
 		if($count = Teacher::destroy(1))
 		{
 			return '成功删除' . $count . '条数据';
