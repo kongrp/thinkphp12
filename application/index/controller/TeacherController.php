@@ -63,8 +63,10 @@ class TeacherController extends Controller
 
 	public function delete()
 	{
-		$state = Teacher::destroy(1);
-		var_dump($state);
-		return '删除成功';
+		if($count = Teacher::destroy(1))
+		{
+			return '成功删除' . $count . '条数据';
+		}
+		return '删除失败';
 	}
 }
