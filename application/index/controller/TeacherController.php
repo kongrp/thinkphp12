@@ -119,9 +119,13 @@ class TeacherController extends Controller
 		$teacher->sex = input('post.sex');
 		$teacher->email = input('post.email');
 
+		$message = '更新成功';
         // 更新
-        var_dump($teacher->validate()->save());
+        if(false === $teacher->validate()->save())
+        {
+        	$message = '更新失败' . $teacher->getError();
+        }
 
-        return '更新成功';
+        return $message;
 	}
 }
