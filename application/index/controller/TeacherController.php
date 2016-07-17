@@ -107,6 +107,19 @@ class TeacherController extends Controller
 
 	public function update()
 	{
-		var_dump(input('post.'));
+		//接收数据
+		$teacher = input('post.');
+		
+		//将数据存入教师数据表
+		$Teacher = new Teacher;
+		$state = $Teacher->validate()->isUpdate()->save($teacehr);
+
+		//根据状态定制提示信息
+		if($state)
+		{
+			return '更新成功';
+		}
+		
+		return '更新失败';
 	}
 }
