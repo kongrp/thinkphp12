@@ -107,24 +107,28 @@ class TeacherController extends Controller
 
 	public function update()
 	{
-		// 接收数据，取要更新的关键字信息
-		$id = input('post.id');
-        
-        // 获取当前对象
-        $teacher = Teacher::get($id);
+		try{
+			// 接收数据，取要更新的关键字信息
+			$id = input('post.id');	
+	        
+	        // 获取当前对象
+	        $teacher = Teacher::get($id);
 
-        // 写入要更新的数据
-        $teacher->name = input('post.name');
-		$teacher->username = input('post.username');
-		$teacher->sex = input('post.sex');
-		$teacher->email = input('post.email');
+	        // 写入要更新的数据
+	        $teacher->name = input('post.name');
+			$teacher->username = input('post.username');
+			$teacher->sex = input('post.sex');
+			$teacher->email = input('post.email');
 
-		$message = '更新成功';
-        // 更新
-        if(false === $teacher->validate()->save())
-        {
-        	$message = '更新失败' . $teacher->getError();
-        }
+			$message = '更新成功';
+	        // 更新
+	        if(false === $teacher->validate()->save())
+	        {
+	        	$message = '更新失败' . $teacher->getError();
+	        }
+	    } catch(\Exception $e){
+	    	$message = $e->getMessage();
+	    }
 
         return $message;
 	}
