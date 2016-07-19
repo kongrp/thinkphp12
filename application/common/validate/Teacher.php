@@ -1,6 +1,6 @@
 <?php
 namespace app\common\validate;
-use think\Validate;  //引用内置验证类
+use think\Validate;  // 引用内置验证类
 
 class Teacher extends Validate
 {

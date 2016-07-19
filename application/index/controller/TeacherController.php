@@ -1,7 +1,7 @@
 <?php
-namespace app\index\controller;   //命名空间，也说明了文件所在的文件夹
-use think\Controller;   //用于与V层进行数据传递
-use app\model\Teacher;  //引用数据库操作类-教师模型
+namespace app\index\controller;   // 命名空间，也说明了文件所在的文件夹
+use think\Controller;   // 用于与V层进行数据传递
+use app\model\Teacher;  // 引用数据库操作类-教师模型
 /**
  * 教师管理，继承think\Controller后，就可以利用V层对数据进行打包了。
  */
@@ -29,23 +29,23 @@ class TeacherController extends Controller
 		}
 	}
 
-	//新建insert触发器，用来实现数据添加的功能
+	// 新建insert触发器，用来实现数据添加的功能
 	public function insert()
 	{
-		$message = ''; //反馈消息
-		$error = ''; //反馈错误信息
+		$message = ''; // 反馈消息
+		$error = ''; // 反馈错误信息
 
 		try{
-			//接收用户输入的数据
+			// 接收用户输入的数据
 			$teacher = input('post.');
 
-			//引用Teacher模型
+			// 引用Teacher模型
 			$Teacher = new Teacher;
 
-			//插入数据
+			// 插入数据
 			$result = $Teacher->validate(true)->data($teacher)->save();
 
-			//反馈结果
+			// 反馈结果
 			if(false === $result)
 			{
 				$error = '新增失败' . $Teacher->getError();
@@ -53,11 +53,11 @@ class TeacherController extends Controller
 				$message = $teacher['name'] . '新增成功';
 			}
 		} catch(\Exception $e){
-			return '系统错误' . $e->getMessage();
+			$error = '系统错误:' . $e->getMessage();
 		}
 
-		//判断是否发生错误
-		if($error = '')
+		// 判断是否发生错误
+		if($error === '')
 		{
 			return $this->success($message, url('index'));
 		} else{
@@ -87,14 +87,14 @@ class TeacherController extends Controller
 
 	public function delete()
 	{
-		$message = '删除成功'; //反馈消息
-		$error = ''; //反馈错误信息
+		$message = '删除成功'; // 反馈消息
+		$error = ''; // 反馈错误信息
 
 		try{
-			//接收id，并转换为int类型
+			// 接收id，并转换为int类型
 			$id = input('get.id/d');
 
-			//获取要删除的对象
+			// 获取要删除的对象
 			$Teacher = Teacher::get($id);
 
 			if(false === $Teacher)
@@ -102,13 +102,13 @@ class TeacherController extends Controller
 				throw new \Exception('不存在id为' . $id . '的教师，删除失败');
 			}
 
-			//删除获取到的对象
+			// 删除获取到的对象
 			if(false === $Teacher->delete())
 			{
 				throw new \Exception('删除失败' . $Teacher->getError());
 			}
 
-			//程序正确执行，进行跳转
+			// 程序正确执行，进行跳转
 			return $this->success($message, url('index'));
 		} catch(\Exception $e){
 			// 程序异常执行，接收异常并报错。
@@ -118,27 +118,35 @@ class TeacherController extends Controller
 
 	public function edit()
 	{
-		// 获取传入ID
-		$id = input('get.id/d');
+		try{
+			// 获取传入ID
+			$id = input('get.id/d');
 
-        // 在Teacher表模型中获取当前记录
-        if(false === $teacher = Teacher::get($id))
+	        // 在Teacher表模型中获取当前记录
+	        if(false === $teacher = Teacher::get($id))
+	        {
+	        	return '系统中未找到id为：' . $id . '的记录';
+	        }
+
+	        // 将数据传给V层
+	        $this->assign('teacher', $teacher);
+
+	        // 获取封装好的V层内容
+	        $htmls = $this->fetch();
+
+	        // 将封装好的V层内容返回给用户
+	        return $htmls;
+	    } catch (\Exception $e)
         {
-        	return '系统中未找到id为：' . $id . '的记录';
+            return '系统错误:' . $e->getMessage();
         }
-
-        // 将数据传给V层
-        $this->assign('teacher', $teacher);
-
-        // 获取封装好的V层内容
-        $htmls = $this->fetch();
-
-        // 将封装好的V层内容返回给用户
-        return $htmls;
 	}
 
 	public function update()
 	{
+		$message = ''; // 反馈消息
+		$error = ''; // 反馈错误信息
+
 		try{
 			// 接收数据，取要更新的关键字信息
 			$id = input('post.id');	
@@ -156,12 +164,18 @@ class TeacherController extends Controller
 	        // 更新
 	        if(false === $teacher->validate()->save())
 	        {
-	        	$message = '更新失败' . $teacher->getError();
+	        	$error = '更新失败' . $teacher->getError();
 	        }
 	    } catch(\Exception $e){
-	    	$message = $e->getMessage();
+	    	$error = '系统错误:' . $e->getMessage();
 	    }
 
-        return $message;
+       	// 进行跳转
+       	if($error === '')
+       	{
+       		return $this->success($message, url('index'));
+       	} else{
+       		return $this->error($error);
+       	}
 	}
 }
