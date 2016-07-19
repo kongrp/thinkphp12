@@ -18,7 +18,6 @@ class TeacherController extends Controller
 			// $teachers 以s结尾，表示它是一个数组，数据中的每一项都是一个对象，这个对象基于Teahcer这个模型。
 			// 将select()方法换成paginate()方法，并将每页显示记录的条数做为参数进行传入。
 			$teachers = $Teacher->paginate($pageSize);
-			var_dump($teachers->count()); 
 
 			// 向V层传数据
 			$this->assign('teachers', $teachers);
