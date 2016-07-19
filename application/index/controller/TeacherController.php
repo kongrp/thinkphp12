@@ -10,10 +10,14 @@ class TeacherController extends Controller
 	public function index()
 	{	
 		try{
+			$pageSize = 5; // 定义每页显示5条记录
+
 			// $Teacher 首写字大写，说明它是一个对象, 更确切一些说明这是基于Teacher这个模型被我们手工实例化得到的，如果存在teacher数据表，它将对应teacher数据表。
 			$Teacher = new Teacher;
+
 			// $teachers 以s结尾，表示它是一个数组，数据中的每一项都是一个对象，这个对象基于Teahcer这个模型。
-			$teachers = $Teacher->select();
+			// 将select()方法换成paginate()ds方法，并将每页显示记录的条数做为参数进行传入。
+			$teachers = $Teacher->paginate($pageSize);
 
 			// 向V层传数据
 			$this->assign('teachers', $teachers);
