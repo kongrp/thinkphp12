@@ -87,25 +87,33 @@ class TeacherController extends Controller
 
 	public function delete()
 	{
-		//接收id，并转换为int类型
-		$id = input('get.id/d');
+		$message = '删除成功'; //反馈消息
+		$error = ''; //反馈错误信息
 
-		//获取要删除的对象
-		$Teacher = Teacher::get($id);
+		try{
+			//接收id，并转换为int类型
+			$id = input('get.id/d');
 
-		if(false === $Teacher)
-		{	
-			return $this->error('不存在id为' . $id . '的教师，删除失败');
+			//获取要删除的对象
+			$Teacher = Teacher::get($id);
+
+			if(false === $Teacher)
+			{	
+				throw new \Exception('不存在id为' . $id . '的教师，删除失败');
+			}
+
+			//删除获取到的对象
+			if(false === $Teacher->delete())
+			{
+				throw new \Exception('删除失败' . $Teacher->getError());
+			}
+
+			//程序正确执行，进行跳转
+			return $this->success($message, url('index'));
+		} catch(\Exception $e){
+			// 程序异常执行，接收异常并报错。
+			return $this->error('系统错误' . $e->getMessage());	
 		}
-
-		//删除获取到的对象
-		if(false === $Teacher->delete())
-		{
-			return $this->error('删除失败' . $Teacher->getError());
-		}
-
-		//进行跳转
-		return $this->success('删除成功', url('index'));
 	}
 
 	public function edit()
