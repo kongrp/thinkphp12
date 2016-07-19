@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>教师管理-新增数据</title>
+	<title>教师管理-编辑数据</title>
 </head>
 <body class="container">
 	<div class="row">
 		<div class="col-md-12">
 				<form action="{:url('update')}" method="post">
 					<label>姓名：</label>
-					<input type="hidden" name='id' value={$teacher->getData('id')} />
+					<input type="hidden" name='id' value="{$teacher->getData('id')}" />
 					<input type="text" name="name" value="{$teacher->getData('name')}"/>
 					<label>用户名：</label>
 					<input type="text" name="username" value="{$teacher->getData('username')}" />
