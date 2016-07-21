@@ -57,4 +57,18 @@ class Teacher extends Model
     	session('teacherId', null);
     	return true;
     }
+
+    static public function isLogin()
+    {
+    	//验证用户是否登录
+		$teacherId = session('teacherId');
+
+		//一般用来检测变量是否设置 
+		if(isset($teacherId))
+		{
+			return true;
+		} else{
+			return false;
+		}
+    }
 }

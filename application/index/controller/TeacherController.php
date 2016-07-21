@@ -7,8 +7,20 @@ use app\model\Teacher;  // 引用数据库操作类-教师模型
  */
 class TeacherController extends Controller
 {
+	public function __construct()
+		{
+			//调用父类构造函数(必须)
+			parent::__construct();
+
+			//验证用户登录
+			if(Teacher::isLogin())
+			{
+				return $this->error('请先登录', url('Login/index'));
+			}
+		}
+	
 	public function index()
-	{			
+	{
 		//获取查询信息
 		$name = input('get.name');
 		echo $name;
