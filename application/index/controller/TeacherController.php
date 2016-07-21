@@ -9,32 +9,26 @@ class TeacherController extends Controller
 {
 	public function index()
 	{	
-		try{
-			//获取查询信息
-			$name = input('get.name');
-			echo $name;
+		//获取查询信息
+		$name = input('get.name');
+		echo $name;
 
-			$pageSize = 5; // 定义每页显示5条记录
+		$pageSize = 5; // 定义每页显示5条记录
 
-			// $Teacher 首写字大写，说明它是一个对象, 更确切一些说明这是基于Teacher这个模型被我们手工实例化得到的，如果存在teacher数据表，它将对应teacher数据表。
-			$Teacher = new Teacher;
+		// $Teacher 首写字大写，说明它是一个对象, 更确切一些说明这是基于Teacher这个模型被我们手工实例化得到的，如果存在teacher数据表，它将对应teacher数据表。
+		$Teacher = new Teacher;
 
-			// $teachers 以s结尾，表示它是一个数组，数据中的每一项都是一个对象，这个对象基于Teahcer这个模型。
-			// 将select()方法换成paginate()方法，并将每页显示记录的条数做为参数进行传入。
-			$teachers = $Teacher->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
+		// $teachers 以s结尾，表示它是一个数组，数据中的每一项都是一个对象，这个对象基于Teahcer这个模型。
+		// 将select()方法换成paginate()方法，并将每页显示记录的条数做为参数进行传入。
+		$teachers = $Teacher->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
 
-			// 向V层传数据
-			$this->assign('teachers', $teachers);
-			 // 从V层取回打包后的数据
-			$htmls = $this->fetch();
+		// 向V层传数据
+		$this->assign('teachers', $teachers);
+		 // 从V层取回打包后的数据
+		$htmls = $this->fetch();
 
-			// 将取回的数据返回给用户
-			return $htmls;
-		} catch(\Exception $e){
-			// 由于对异常进行了处理，如果发生了错误，我们仍然需要查看具体的异常位置及信息，那么需要将以下代码的注释去掉。
-            // throw $e;
-			return '系统错误' . $e->getMessage();
-		}
+		// 将取回的数据返回给用户
+		return $htmls;
 	}
 
 	// 新建insert触发器，用来实现数据添加的功能
