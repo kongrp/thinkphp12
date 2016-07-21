@@ -6,13 +6,17 @@ class Test1
 	{
 		echo 'hehehe';
 	}
+}
 
-	public function sayHello()
+class son extends Test1
+{
+	public function __construct()
 	{
-		echo 'haha';
+		parent::__construct();
+		echo 'hh';
 	}
 }
 
 $Test1 = new Test1;
 echo '<br />';
-$Test1->sayHello();
+$Son = new Son;
