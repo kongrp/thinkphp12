@@ -1,15 +1,24 @@
 <?php
 namespace app\index\controller;
-use think\Db;
+use think\Controller;   // 用于与V层进行数据传递
+use app\model\Teacher;  //引入教师
 
-class IndexController
+class IndexController extends Controller
 {
+    public function __construct()
+	{
+		//调用父类构造函数(必须)
+		parent::__construct();
+
+		//验证用户登录
+		if(!Teacher::isLogin())
+		{
+			return $this->error('请先登录', url('Login/index'));
+		}
+	}
+
     public function index()
     {
-       //获取教师表中的所有数据
-       $teachers = Db::name('teacher')->select();
-		
-		//查看获取的数据
-		var_dump($teachers);
+
     }
 }

@@ -1,24 +1,11 @@
 <?php
 namespace app\index\controller;   // 命名空间，也说明了文件所在的文件夹
-use think\Controller;   // 用于与V层进行数据传递
 use app\model\Teacher;  // 引用数据库操作类-教师模型
 /**
  * 教师管理，继承think\Controller后，就可以利用V层对数据进行打包了。
  */
-class TeacherController extends Controller
+class TeacherController extends IndexController
 {
-	public function __construct()
-		{
-			//调用父类构造函数(必须)
-			parent::__construct();
-
-			//验证用户登录
-			if(Teacher::isLogin())
-			{
-				return $this->error('请先登录', url('Login/index'));
-			}
-		}
-	
 	public function index()
 	{
 		//获取查询信息
