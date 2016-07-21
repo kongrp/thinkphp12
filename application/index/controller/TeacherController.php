@@ -9,6 +9,13 @@ class TeacherController extends Controller
 {
 	public function index()
 	{	
+		//验证用户是否登录
+		$teacherId = session('teacherId');
+		if($teacherId === null)
+		{
+			return $this->error('请先登录', url('Login/index'));
+		}
+		
 		//获取查询信息
 		$name = input('get.name');
 		echo $name;
