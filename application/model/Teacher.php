@@ -36,13 +36,25 @@ class Teacher extends Model
      * @param  string $password 密码
      * @return bool           
      */
-    public function checkPassword($passord)
+   
+    public function checkPassword($password)
     {
-    	if($Teacher->getData('password') === $password)
+    	if($this->getData('password') === $password)
     	{
     		return true;
     	} else{
     		return false;
     	}
+    }
+
+	/**
+     * 注销
+     * @return bool  成功true，失败false。
+     * @author panjie
+     */
+    static public function logOut()
+    {
+    	session('teacherId', null);
+    	return true;
     }
 }

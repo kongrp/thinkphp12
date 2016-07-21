@@ -26,4 +26,15 @@ class LoginController extends Controller
 			return $this->success('用户名或密码错误', url('index'));
 		}
 	}
+
+	//用户注销退出系统
+	public function logOut()
+	{
+		if(Teacher::logOut())
+		{
+			return $this->success('注销成功', url('index'));
+		} else{
+			return $this->error('注销失败', url('index'));
+		}
+	}
 }
