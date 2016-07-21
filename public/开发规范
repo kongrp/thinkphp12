@@ -1,0 +1,10 @@
+
+
+开发规范:
+
+1、每个表的关键字都是id，类型为int 11、无符号(un)、自增。
+2、第个表都存在create_time及update_time两个字段，用以记录新建与更新的时间。类型是int 11、无符号。
+3、字段为为xxxx_id的，对应的一定是xxxx表中的主键。类型为int 11、un。
+4、所有字段属性均为not null，不能为null，并设置默认值为not null。
+5、int类型与bool类型的值，默认值统一设置为0。
+6、varchar、char、text类型的值，默认值统一设置为empty string。
