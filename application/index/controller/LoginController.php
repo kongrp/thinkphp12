@@ -28,23 +28,16 @@ class LoginController extends Controller
  		$Teacher = Teacher::get($map);
  		//var_dump($Teacher);  --输出例如张三这个对象的基本信息
   
-        //就像我以前说过的，我们每调用一个方法，都要非常清晰的知道它返回值类型是什么
+        // 就像我以前说过的，我们每调用一个方法，都要非常清晰道它返回值类型是什么
         // $Teacher要么是一个对象，要么是false。
-        if(false !== $Teacher)
-        {	
-        	// 验证密码是否正确
-        	if($Teacher->getData('password') !== input('post.password'))
-        	{
-        		// 用户名密码错误，跳转到登录界面。
-        		return $this->error('密码错误', url('index'));
-        	} else{
-        		// 用户名密码正确，将teacherId存session。
-        		session = ('teacherId', $Teacher->getData('id'));
-        		return $this->success('登录成功', url('Teacher/index'));
-        	}
+        if(false !== $Teacher && $Teacher->getData('password') === input('post.password'))
+        {			
+			// 用户名密码正确，将teacherId存session。
+        	session('teacherId', $Teacher->getData('id'));
+        	return $this->success('登录成功', url('Teacher/index'));
         } else{
         	// 用户名密码错误，跳转到登录界面。
-        	return $this->error('用户名不存在', url('index'));
+        	return $this->error('用户名或密码错误', url('index'));
         }
 	}
 }
