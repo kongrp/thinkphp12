@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>班级管理-编辑班级数据</title>
+</head>
+<body>
+	<form action="{:url('update')}" method="post">
+		<input type="hidden" name="id" value="{$Klass->getData('id')}">
+		<label for="name">name:</label>
+		<input type="text" name="name" id="name" value="{$Klass->getData('name')}" />
+		<label for="teacher">teacher:</label>
+		<select name="teacher_id" id="teacher">
+			{volist name="teachers" id="teacher"}
+			<option value="{$teacher->getData('id')}" {eq name="teacher->getData('id')" value="$Klass->getData('teacher_id')"} selected="selected" {/eq}>{$teacher->getData('name')}</option>
+			{/volist}
+		</select>
+		<button type="submit">submit</button>
+	</form>
+</body>
+</html>
