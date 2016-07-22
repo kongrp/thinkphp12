@@ -1,12 +1,13 @@
 <?php
 namespace app\index\controller;
 use app\model\Teacher;
+use think\Controller;
 /**
  * 登录与注销模块
  * kongrp
  */
 
-class LoginController extends IndexController
+class LoginController extends Controller
 {
 	//显示登录表单
 	public function index()
