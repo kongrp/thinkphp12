@@ -4,7 +4,7 @@ use think\Model;
 
 class Student extends Model
 {
-	 //
+	 //Student表与Klass表关联
 	 public function Klass()
 	 {
 	 	return $this->belongsTo('klass');

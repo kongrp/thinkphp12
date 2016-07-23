@@ -5,11 +5,10 @@ use think\Model;
  * 班级表对应的模型类
  */
 class Klass extends Model
-{
-	public function getTeacher()
+{	
+	//Klass表与Teacher表关联
+	public function Teacher()
 	{
-		$teacherId = $this->getData('teacher_id');
-		$Teacher = Teacher::get($teacherId);
-		return $Teacher;
+		return $this->belongsTo('teacher');
 	}
 }
