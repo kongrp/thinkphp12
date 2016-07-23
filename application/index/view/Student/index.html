@@ -46,7 +46,7 @@
 					<td>{$student->sex}</td>
 					<td>{$student->getData('email')}</td>
 					<td>{$student->create_time}</td>
-					<td>{$student->getData('klass_id')}</td>
+					<td>{$student->Klass->name}</td>
 					<td></td>
 					<td>
 						<a class="btn btn-danger btn-sm" href="{:url('delete?id=' . $student->getData('id'))}"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除

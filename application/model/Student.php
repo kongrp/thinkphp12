@@ -4,6 +4,14 @@ use think\Model;
 
 class Student extends Model
 {
+	 //
+	 public function Klass()
+	 {
+	 	return $this->belongsTo('klass');
+	 }
+
+
+
 	 /**
      * 输出性别的属性
      * @return string 0男，1女
