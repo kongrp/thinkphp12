@@ -32,8 +32,8 @@ class Student extends Model
      * @param  int $value 时间戳
      * @return string  转换后的字符串
 	 */
-	// public function getCreateTimeAttr($value)
-	// {
-	// 	return date('Y-m-d', $value);
-	// }
+	public function getCreateTimeAttr($value)
+	{
+		return date('Y-m-d', $value);
+	}
 }
