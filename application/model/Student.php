@@ -21,6 +21,8 @@ class Student extends Model
 		}
 	}
 
+	protected $dateFormat = 'Y年m月d日';
+
 	protected $type = [
 		'create_time' => 'datetime',
 	];
