@@ -43,7 +43,7 @@
 					<td>{$key}</td>
 					<td>{$student->getData('name')}</td>
 					<td>{$student->getData('num')}</td>
-					<td>{eq name="student->getData('sex')" value="0"}男{else /}女{/eq}</td>
+					<td>{$student->sex}</td>
 					<td>{$student->getData('email')}</td>
 					<td>{$student->getData('create_time')}</td>
 					<td>{$student->getData('klass_id')}</td>
