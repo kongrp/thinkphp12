@@ -21,13 +21,17 @@ class Student extends Model
 		}
 	}
 
+	protected $type = [
+		'create_time' => 'datetime',
+	];
+
 	/**
 	 *获取要显示的创建时间
      * @param  int $value 时间戳
      * @return string  转换后的字符串
 	 */
-	public function getCreateTimeAttr($value)
-	{
-		return date('Y-m-d', $value);
-	}
+	// public function getCreateTimeAttr($value)
+	// {
+	// 	return date('Y-m-d', $value);
+	// }
 }
