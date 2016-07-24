@@ -2,7 +2,7 @@
 namespace app\model;
 use think\Model;
 
-class Course extends Model
+class KlassCourse extends Model
 {
 	
 }
