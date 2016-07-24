@@ -7,9 +7,23 @@ class StudentController extends IndexController
 {
 	public function index()
 	{
-		$students = Student::paginate(2);
+		//获取查询信息
+		$name = input('get.name');
+		echo $name;
+
+		$pageSize = 1; // 定义每页显示5条记录
+		
+		$Student = new Student;
+
+		$students = $Student->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
+
+		// 向V层传数据
 		$this->assign('students', $students);
-		return $this->fetch();
+		 // 从V层取回打包后的数据
+		$htmls = $this->fetch();
+
+		// 将取回的数据返回给用户
+		return $htmls;
 	}
 
 	public function add()
