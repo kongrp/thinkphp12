@@ -37,12 +37,26 @@ class CourseController extends IndexController
 
         // 接收class_id这个数组
         $klassIds = input('post.klass_id/a') ? input('post.klass_id/a') : array();       // /a表示获取的类型为数组
-
-        if ($Course->Klasses()->saveAll($klassIds) === false)
+        if($klassIds)
         {
-            return $this->error('保存错误：' . $Course->Klasses()->getError());
-        }
+	        if ($Course->Klasses()->saveAll($klassIds) === false)
+	        {
+	            return $this->error('保存错误：' . $Course->Klasses()->getError());
+	        }
+	    }
 
         return $this->success('操作成功', url('index'));
     }
-}
+
+    public function edit()
+    {
+    	$id = input('get.id/d');
+    	if(false === $Course = Course::get($id))
+    	{
+    		return $this->error('不存在id为：' . '的记录');
+    	}	
+
+    	$this->assign('Course', $Course);
+    	return $this->fetch();
+    }
+}	

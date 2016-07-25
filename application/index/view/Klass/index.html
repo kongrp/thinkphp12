@@ -37,7 +37,7 @@
 				<tr>
 					<td>{$key}</td>
 					<td>{$klass->getData('name')}</td>
-					<td>{$klass->Teacher->getData('name')}</td>
+					<td>{$klass->Teacher->name}</td>
 					<td>
 						<a class="btn btn-danger btn-sm" href="{:url('delete?id=' . $klass->getData('id'))}"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除
 						</a>&nbsp;
