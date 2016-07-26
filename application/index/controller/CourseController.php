@@ -39,7 +39,8 @@ class CourseController extends IndexController
 
         // 接收class_id这个数组
         $klassIds = input('post.klass_id/a') ? input('post.klass_id/a') : array();       // /a表示获取的类型为数组
-        if($klassIds)
+        
+        if (!empty($klassIds))
         {
 	        if ($Course->Klasses()->saveAll($klassIds) === false)
 	        {
