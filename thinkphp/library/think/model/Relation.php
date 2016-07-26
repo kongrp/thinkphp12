@@ -581,6 +581,27 @@ class Relation
         return $result;
     }
 
+
+     /**
+     * 删除当前关联数据，并批量保存当前关联数据对象
+     * @access public
+     * @param array $dataSet 数据集
+     * @param array $pivot 中间表额外数据
+     * @return integer
+     */
+    public function updateAll(array $dataSet, array $pivot = [])
+    {
+        // 删除当前关联数据
+        $pk                       = $this->parent->getPk();
+        $map[$this->localKey]     = $this->parent->$pk;
+        $query                    = clone $this->parent->db();
+        $query->table($this->middle)->where($map)->delete();
+
+        // 批量保存当前数据
+        return $this->saveAll($dataSet, $pivot);
+    }
+
+
     /**
      * 附加关联的一个中间表数据
      * @access public

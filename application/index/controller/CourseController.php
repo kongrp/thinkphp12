@@ -78,23 +78,13 @@ class CourseController extends IndexController
             return $this->error('课程信息更新发生错误：' . $Course->getError());
         }
 
-        // 更新课程班级信息
-        // 删除原有信息
-        $map = ['course_id'=>$id];
-        if (false === $Course->KlassCourse->where($map)->delete())
-        {
-            return $this->error('删除班级课程关联信息发生错误:' . $Course->KlassCourse->getError());
-        }   
-        
-
         // 增加新增数据，执行添加操作。
-        if (!empty(input('post.klass_id/a')) && false === $Course->Klasses()->saveAll(input('post.klass_id/a')))
+        if (false === $Course->Klasses()->updateAll(input('post.klass_id/a')))
         {
             return $this->error('添加关联数据发生错误' . $Course->KlassCourse->getError());
         }
 
-       return $this->success('更新成功', url('index'));
+
+        return $this->success('更新成功', url('index'));
     }
-
-
 }	
