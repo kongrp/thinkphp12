@@ -35,4 +35,11 @@ class Course extends Model
             return true;
         }
     }
+
+    //相当于增加了一个KlassCourse属性
+    public function klassCourse(){
+        $KlassCourse = new KlassCourse;
+        $this->data['KlassCourse'] = $KlassCourse;
+        return $KlassCourse;
+    }
 }
