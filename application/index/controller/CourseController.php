@@ -14,6 +14,8 @@ class CourseController extends IndexController
 		$Course = new Course;
 		$courses = $Course->where('name', 'like', '%' . $name . '%')->paginate(2);
 		$this->assign('courses', $courses);
+		$this->assign('Course', $Course);
+
 		return $this->fetch();
 	}
 
