@@ -25,20 +25,11 @@ class KlassController extends IndexController
 		//获取所有的教师信息
 		$teachers = Teacher::all();
 		$this->assign('teachers', $teachers);
-		return $this->fetch();
-	}
 
-	public function save()
-	{
 		$Klass = new Klass;
-		$Klass->name = input('post.name');
-		$Klass->teacher_id = input('post.teacher_id/d');
-		if(false === $Klass->validate()->save())
-		{
-			return $this->error('添加数据错误：' . $Klass->getError());
-		} else{
-			return $this->success('操作成功', url('index'));
-		}
+		$this->assign('Klass', $Klass);	
+
+		return $this->fetch('edit');
 	}
 
 	public function edit()
@@ -57,16 +48,13 @@ class KlassController extends IndexController
 			return $this->fetch();
 		}
 
-		public function update()
+		public function save()
 		{
 			$id = input('post.id/d');
 
 			// 获取传入的班级信息
 			$Klass = Klass::get($id);
-			if(false === $Klass)
-			{
-				return $this->error('系统未找到ID为' . $id . '的记录');
-			}
+			$Klass = $Klass ? $Klass : new Klass;
 
 			$Klass->name = input('post.name');
 			$Klass->teacher_id = input('post.teacher_id');
