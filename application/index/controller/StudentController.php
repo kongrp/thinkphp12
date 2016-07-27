@@ -11,7 +11,7 @@ class StudentController extends IndexController
 		$name = input('get.name');
 		echo $name;
 
-		$pageSize = 1; // 定义每页显示5条记录
+		$pageSize = 5; // 定义每页显示5条记录
 		
 		$Student = new Student;
 
@@ -30,23 +30,11 @@ class StudentController extends IndexController
 	{
 		$klasses = Klass::all();
 		$this->assign('klasses', $klasses);
-		return $this->fetch();
-	}
 
-	public function save()
-	{
 		$Student = new Student;
-		$Student->name = input('post.name');
-		$Student->num = input('post.num');
-		$Student->sex = input('post.sex');
-		$Student->klass_id = input('post.klass_id/d');
-		$Student->email = input('post.email');
-		if(false === $Student->validate()->save())
-		{
-			return $this->error('添加数据错误：' . $Student->getError());
-		} else{
-			return $this->success('操作成功', url('index'));
-		}
+		$this->assign('Student', $Student);
+
+		return $this->fetch('edit');
 	}
 
 	public function edit()
@@ -65,17 +53,13 @@ class StudentController extends IndexController
 		return $this->fetch();
 	}
 	
-	public function update()
+	public function save()
 	{
 		$id = input('post.id/d');
 
 		//获取传入的对象信息
 		$Student = Student::get($id);
-
-		if(false === $Student)
-		{
-			return $this->error('系统未找到ID为' . $id . '的记录');
-		}
+		$Student = $Student ? $Student:new Student;
 
 		//数据更新
 		$Student->name = input('post.name');

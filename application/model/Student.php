@@ -10,8 +10,6 @@ class Student extends Model
 	 	return $this->belongsTo('klass');
 	 }
 
-
-
 	 /**
      * 输出性别的属性
      * @return string 0男，1女
