@@ -7,14 +7,14 @@
 <body class="container">
 	<div class="row">
 		<div class="col-md-12">
-				<form action="{:url('update')}" method="post">
+				<form action="{:url('save')}" method="post">
 					<label>姓名：</label>
 					<input type="hidden" name='id' value="{$teacher->id}" />
 					<input type="text" name="name" value="{$teacher->name}"/>
 					<label>用户名：</label>
 					<input type="text" name="username" value="{$teacher->username}" />
 					<label>性别：</label>
-					<select>
+					<select name="sex">
 						<option value="0">男</option>
 						<option value="1" {eq name="$teacher->sex" value="1"}selected="selected"{/eq}>女</option>
 					</select>

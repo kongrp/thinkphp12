@@ -140,40 +140,30 @@ class TeacherController extends IndexController
         }
 	}
 
-	public function update()
-	{
-		$message = ''; // 反馈消息
-		$error = ''; // 反馈错误信息
+	public function save()
+    {
+        $id = input('post.id/d');
 
-		try{
-			// 接收数据，取要更新的关键字信息
-			$id = input('post.id');	
-	        
-	        // 获取当前对象
-	        $teacher = Teacher::get($id);
+       // 初始化一个Teacher对象
+        if (false === $Teacher = Teacher::get($id))
+        {
+            $Teacher = new Teacher;
+            $Teacher->username  = input('post.username');
+        }
 
-	        // 写入要更新的数据
-	        $teacher->name = input('post.name');
-			$teacher->username = input('post.username');
-			$teacher->sex = input('post.sex');
-			$teacher->email = input('post.email');
+        // 赋值
+        $Teacher->name      = input('post.name');
+        $Teacher->sex       = input('post.sex');
+        $Teacher->email     = input('post.email');
 
-			$message = '更新成功';
-	        // 更新
-	        if(false === $teacher->validate()->save())
-	        {
-	        	$error = '更新失败' . $teacher->getError();
-	        }
-	    } catch(\Exception $e){
-	    	$error = '系统错误:' . $e->getMessage();
-	    }
+        var_dump($Teacher);
 
-       	// 进行跳转
-       	if($error === '')
-       	{
-       		return $this->success($message, url('index'));
-       	} else{
-       		return $this->error($error);
-       	}
-	}
+        // 保存数据
+        if (false === $Teacher->validate()->save())
+        {
+            return $this->error('操作失败' . $Teacher->getError());
+        } 
+
+        return $this->success('操作成功', url('index'));
+    }
 }
