@@ -12,9 +12,7 @@
 					<input type="hidden" name='id' value="{$teacher->id}" />
 					<input type="text" name="name" value="{$teacher->name}"/>
 					<label>用户名：</label>
-					{eq name="teacher->username" value=""}
-					<input type="text" name="username" value="{$teacher->username}" />{else /}{$teacher->username}
-					{/eq}
+					<input type="text" name="username" value="{$teacher->username}" />
 					<label>性别：</label>
 					<select name="sex">
 						<option value="0">男</option>
