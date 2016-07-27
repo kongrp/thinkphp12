@@ -45,7 +45,7 @@
 					<td>{$teacher->getData('email')}</td>
 					<td>{$teacher->getData('username')}</td>
 					<td><a class="btn btn-primary" href="{:url('edit?id=' . $teacher->getData('id'))}">编辑</a>&nbsp;&nbsp;&nbsp;
-					<a class="btn btn-primary href="{:url('index/Teacher/delete?id=' . $teacher->getData('id'))}">删除</a></td>
+					<a class="btn btn-primary" href="{:url('index/Teacher/delete?id=' . $teacher->getData('id'))}">删除</a></td>
 
 				</tr>
 				{/volist}
