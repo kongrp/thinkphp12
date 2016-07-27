@@ -23,33 +23,8 @@ class CourseController extends IndexController
 	{
         $Course = new Course;
         $this->assign('Course', $Course);
-        return $this->fetch();
+        return $this->fetch('edit');
 	}
-
-	public function save()
-	{
-		 // 存课程信息
-        $Course = new Course();
-        $Course->name = input('post.name');
-
-        if (false === $Course->validate(true)->save())
-        {
-            return $this->error('保存错误：' . $Course->getError());
-        }
-
-        // 接收class_id这个数组
-        $klassIds = input('post.klass_id/a') ? input('post.klass_id/a') : array();       // /a表示获取的类型为数组
-        
-        if (!empty($klassIds))
-        {
-	        if ($Course->Klasses()->saveAll($klassIds) === false)
-	        {
-	            return $this->error('保存错误：' . $Course->Klasses()->getError());
-	        }
-	    }
-
-        return $this->success('操作成功', url('index'));
-    }
 
     public function edit()
     {
@@ -63,14 +38,12 @@ class CourseController extends IndexController
     	return $this->fetch();
     }
 
-    public function update()
+    public function save()
     {
         // 更新当前课程基本信息
         $id = input('post.id/d');
-        if (false === $Course = Course::get($id))
-        {
-            return $this->error('不存在ID为' . $id . '的记录');
-        }
+        $Course = Course::get($id);
+        $Course = $Course ? $Course : new Course;
 
         $Course->name = input('post.name');
         if (false === $Course->save())
@@ -83,8 +56,20 @@ class CourseController extends IndexController
         {
             return $this->error('添加关联数据发生错误' . $Course->KlassCourse->getError());
         }
-
-
         return $this->success('更新成功', url('index'));
+    }
+
+    public function delete()
+    {
+        $id = input('get.id/d');
+        if(false === $Course = Course::get($id))
+        {
+            return $this->error('不存在id为：' . '的记录');
+        }
+        if(false === $Course->delete)
+        {
+            return $this->error('删除失败' . $Course->getError());
+        }
+        return $this->success('删除成功', url('index'));
     }
 }	
