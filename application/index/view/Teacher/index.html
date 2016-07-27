@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>教师管理</title>
 	<link rel="stylesheet" type="text/css" href="/thinkphp12/public/static/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	
 </head>
 <body class="container">
 	<div class="row">
@@ -43,7 +44,7 @@
 					<td>{eq name="$teacher->getData('sex')" value="0"}男{else /}女{/eq}</td> 
 					<td>{$teacher->getData('email')}</td>
 					<td>{$teacher->getData('username')}</td>
-					<td><a class="btn btn-primary" href="{:url('edit?id=' . $teacher->getData('id'))}">编辑</a>&nbsp&nbsp&nbsp
+					<td><a class="btn btn-primary" href="{:url('edit?id=' . $teacher->getData('id'))}">编辑</a>&nbsp;&nbsp;&nbsp;
 					<a class="btn btn-primary href="{:url('index/Teacher/delete?id=' . $teacher->getData('id'))}">删除</a></td>
 
 				</tr>

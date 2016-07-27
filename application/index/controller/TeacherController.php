@@ -68,12 +68,9 @@ class TeacherController extends IndexController
 
 	public function add()
 	{
-		try{
-			$htmls = $this->fetch();
-			return $htmls;
-		} catch(\Exception $e){
-			return '系统错误' . getMessage();
-		}
+		$teacher = new Teacher;
+		$this->assign('teacher', $teacher);
+		return $this->fetch('edit');
 	}
 
 	public function test()
