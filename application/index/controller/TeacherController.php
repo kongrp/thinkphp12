@@ -30,57 +30,11 @@ class TeacherController extends IndexController
 		return $htmls;
 	}
 
-	// 新建insert触发器，用来实现数据添加的功能
-	public function insert()
-	{
-		$message = ''; // 反馈消息
-		$error = ''; // 反馈错误信息
-
-		try{
-			// 接收用户输入的数据
-			$teacher = input('post.');
-
-			// 引用Teacher模型
-			$Teacher = new Teacher;
-
-			// 插入数据
-			$result = $Teacher->validate(true)->data($teacher)->save();
-
-			// 反馈结果
-			if(false === $result)
-			{
-				$error = '新增失败' . $Teacher->getError();
-			} else{
-				$message = $teacher['name'] . '新增成功';
-			}
-		} catch(\Exception $e){
-			$error = '系统错误:' . $e->getMessage();
-		}
-
-		// 判断是否发生错误
-		if($error === '')
-		{
-			return $this->success($message, url('index'));
-		} else{
-			return $this->error($error);
-		}	
-	}
-
 	public function add()
 	{
 		$teacher = new Teacher;
 		$this->assign('teacher', $teacher);
 		return $this->fetch('edit');
-	}
-
-	public function test()
-	{
-		$data = array();
-        $data['username'] = 'ce';
-        $data['name'] = '1';
-        $data['sex'] = '1';
-        $data['email'] = 'hello@hello.com';
-        var_dump($this->validate($data, 'Teacher'));
 	}
 
 	public function delete()
