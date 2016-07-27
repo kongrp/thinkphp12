@@ -39,7 +39,8 @@
 					<td>{$course->getData('name')}</td>
 					<td>
 						{volist name="Course->Klasses()->select()" id="klass"}
-							<lable>{$klass->name}</lable>
+							{$course->getChecked($klass)}
+
 						{/volist}
 					</td>
 					<td>
