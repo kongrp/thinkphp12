@@ -110,14 +110,11 @@ class TeacherController extends IndexController
         $Teacher->sex       = input('post.sex');
         $Teacher->email     = input('post.email');
 
-        var_dump($Teacher);
-
         // 保存数据
         if (false === $Teacher->validate()->save())
         {
             return $this->error('操作失败' . $Teacher->getError());
         } 
-
         return $this->success('操作成功', url('index'));
     }
 }
