@@ -1,6 +1,6 @@
 {extend name="edit"}
 {block name="title"}
-	{eq name="$teacher->id" value=""}添加教师{else /}编辑教师{/eq}
+	{eq name="teacher->id" value=""}添加教师{else /}编辑教师{/eq}
 {/block}
 {block name="content"}
 	<form action="{:url('save')}" method="post">
