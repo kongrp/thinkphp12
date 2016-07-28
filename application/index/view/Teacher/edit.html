@@ -1,30 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>教师管理-编辑数据</title>
-</head>
-<body class="container">
-	<div class="row">
-		<div class="col-md-12">
-				<form action="{:url('save')}" method="post">
-					<label>姓名：</label>
-					<input type="hidden" name='id' value="{$teacher->id}" />
-					<input type="text" name="name" value="{$teacher->name}"/>
-					<label>用户名：</label>
-					{eq name="teacher->username" value=""}
-					<input type="text" name="username" value="{$teacher->username}" />{else /}{$teacher->username}
-					{/eq}
-					<label>性别：</label>
-					<select name="sex">
-						<option value="0">男</option>
-						<option value="1" {eq name="$teacher->sex" value="1"}selected="selected"{/eq}>女</option>
-					</select>
-					<label>邮箱：</label>
-					<input type="email1" name="email" value="{$teacher->email}" />
-					<button type="submit">保存</button>
-				</form>
-		</div>
-	</div>
-</body>
-</html>
+{extend name="edit"}
+{block name="title"}
+	{eq name="$teacher->id" value=""}添加教师{else /}编辑教师{/eq}
+{/block}
+{block name="content"}
+	<form action="{:url('save')}" method="post">
+		<label>姓名：</label>
+		<input type="hidden" name='id' value="{$teacher->id}" />
+		<input type="text" name="name" value="{$teacher->name}"/>
+		<label>用户名：</label>
+		{eq name="teacher->username" value=""}
+		<input type="text" name="username" value="{$teacher->username}" />{else /}{$teacher->username}
+		{/eq}
+		<label>性别：</label>
+		<select name="sex">
+			<option value="0">男</option>
+			<option value="1" {eq name="$teacher->sex" value="1"}selected="selected"{/eq}>女</option>
+		</select>
+		<label>邮箱：</label>
+		<input type="email1" name="email" value="{$teacher->email}" />
+		<button type="submit">保存</button>
+	</form>
+{/block}
